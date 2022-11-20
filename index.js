@@ -19,3 +19,7 @@
 // * user login to use the application
 
 //* can add a favouriting/review system for users so they can see what other people think of the books they are browsing
+
+//* use ascii logo for the thing and the console.table for how it should show the information
+
+//* browse around npm packages for interesting things that may help or make it even better

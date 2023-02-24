@@ -2,10 +2,11 @@
 
 #* use SQLLite or MYSQL database and Python as the backend
 
+# * Make it a full stack application for book inquiries with react front end and python backend--- maybe use Django!?!??!
 
 #* use graphql as API MAYBEEE
 
-# * use CLI for user to search the database based on criteria
+
 
 #* use randomisers to seed data with X amount in stock
 

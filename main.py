@@ -1,3 +1,4 @@
+# use the pyqt6 stuff for a GUI!?!?!? easy to make with a small database like SQLITE
 #* library book system that will have a book database
 
 #* use SQLLite or MYSQL database and Python as the backend

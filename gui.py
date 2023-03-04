@@ -1,6 +1,10 @@
 from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog, QVBoxLayout, QLineEdit, QComboBox, QPushButton
 from PyQt6.QtGui import QAction, QIcon
 import sys
+from dialogs.searchdialog import SearchDialog
+from dialogs.aboutdialog import AboutDialog
+from dialogs.exitdialog import ExitDialog
+from dialogs.statusdialog import StatusDialog
 
 
 class MainWindow(QMainWindow):
@@ -91,57 +95,6 @@ class MainWindow(QMainWindow):
     def exit_app(self):
         dialog = ExitDialog()
         dialog.exec()
-
-
-class SearchDialog(QDialog):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Search Books")
-        self.setFixedWidth(300)
-        self.setFixedHeight(150)
-
-        layout = QVBoxLayout()
-        self.search_book = QLineEdit()
-        self.search_book.setPlaceholderText("Search Book Title")
-        layout.addWidget(self.search_book)
-
-        self.book_genre = QComboBox()
-        # !!!! COPY AND PASTE THE GENRES FROM THE API
-        genres = ["Horror", "Thriller", "Action", "Self-Help"]
-        self.book_genre.addItems(genres)
-        self.book_genre.setCurrentText(genres[0])
-        layout.addWidget(self.book_genre)
-
-        button = QPushButton("Search")
-        button.clicked.connect(self.search_for_book)
-        layout.addWidget(button)
-        self.setLayout(layout)
-
-    def search_for_book(self):
-        # ? This will call the api for the books 
-        pass
-
-
-class AboutDialog(QMessageBox):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("About")
-        content = """This application allows users to search for books based on title or genre and then add them to their favourites and then select if they want to read/currently reading or read.
-        """
-        self.setText(content)
-
-
-class StatusDialog(QDialog):
-    def __init__(self):
-        super().__init__
-        # ? Not sure if this can access the update_status function from the main window but if so then yea use that to update the status
-        # ? Make this a checkbox with "none", "want to read", "currently reading", "read"
-
-
-class ExitDialog(QDialog):
-    def __init__(self):
-        super().__init__
-        # ? Just a window that asks if the user wants to exit with yes or no and then no stays on the app and yes closes the app
 
 
 if __name__ == '__main__':

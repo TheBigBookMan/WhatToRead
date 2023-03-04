@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog
+from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog, QVBoxLayout, QLineEdit, QComboBox, QPushButton
 from PyQt6.QtGui import QAction, QIcon
 import sys
 
@@ -33,6 +33,10 @@ class MainWindow(QMainWindow):
         exit_action = QAction("Exit", self)
         file_menu_item.addAction(exit_action)
         exit_action.triggered.connect(self.exit_app)
+
+        search_action = QAction("Search", self)
+        edit_menu_item.addAction(search_action)
+        search_action.triggered.connect(self.search)
 
         add_favourites_action = QAction("Add To Favourites", self)
         edit_menu_item.addAction(add_favourites_action)
@@ -72,6 +76,10 @@ class MainWindow(QMainWindow):
       # ? create widget for user to see their read reading section
       pass
 
+    def search(self):
+        dialog = SearchDialog()
+        dialog.exec()
+
     def about(self):
         dialog = AboutDialog()
         dialog.exec()
@@ -84,6 +92,34 @@ class MainWindow(QMainWindow):
         dialog = ExitDialog()
         dialog.exec()
 
+
+class SearchDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Search Books")
+        self.setFixedWidth(300)
+        self.setFixedHeight(150)
+
+        layout = QVBoxLayout()
+        self.search_book = QLineEdit()
+        self.search_book.setPlaceholderText("Search Book Title")
+        layout.addWidget(self.search_book)
+
+        self.book_genre = QComboBox()
+        # !!!! COPY AND PASTE THE GENRES FROM THE API
+        genres = ["Horror", "Thriller", "Action", "Self-Help"]
+        self.book_genre.addItems(genres)
+        self.book_genre.setCurrentText(genres[0])
+        layout.addWidget(self.book_genre)
+
+        button = QPushButton("Search")
+        button.clicked.connect(self.search_for_book)
+        layout.addWidget(button)
+        self.setLayout(layout)
+
+    def search_for_book(self):
+        # ? This will call the api for the books 
+        pass
 
 
 class AboutDialog(QMessageBox):

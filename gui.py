@@ -1,10 +1,14 @@
-from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox, QDialog, QVBoxLayout, QLineEdit, QComboBox, QPushButton
+from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QLineEdit, QComboBox, QPushButton, QToolBar
 from PyQt6.QtGui import QAction, QIcon
 import sys
 from dialogs.searchdialog import SearchDialog
 from dialogs.aboutdialog import AboutDialog
 from dialogs.exitdialog import ExitDialog
 from dialogs.statusdialog import StatusDialog
+from dialogs.favouritesdialog import FavouritesDialog
+from dialogs.toreaddialog import ToReadDialog
+from dialogs.currentlyreadingdialog import CurrentlyReadingDialog
+from dialogs.readdialog import ReadDialog
 
 
 class MainWindow(QMainWindow):
@@ -20,19 +24,19 @@ class MainWindow(QMainWindow):
 
         favourites_action = QAction("Favourites", self)
         file_menu_item.addAction(favourites_action)
-        favourites_action.triggered.connect(self.favourites)
+        favourites_action.triggered.connect(self.open_favourites)
 
         to_read_action = QAction("To Read", self)
         file_menu_item.addAction(to_read_action)
-        to_read_action.triggered.connect(self.to_read)
+        to_read_action.triggered.connect(self.open_to_read)
         
         currently_reading_action = QAction("Currently Reading", self)
         file_menu_item.addAction(currently_reading_action)
-        currently_reading_action.triggered.connect(self.currently_reading)
+        currently_reading_action.triggered.connect(self.open_currently_reading)
 
         read_action = QAction("Read", self)
         file_menu_item.addAction(read_action)
-        read_action.triggered.connect(self.read)
+        read_action.triggered.connect(self.open_read)
 
         exit_action = QAction("Exit", self)
         file_menu_item.addAction(exit_action)
@@ -54,6 +58,28 @@ class MainWindow(QMainWindow):
         help_menu_item.addAction(about_action)
         about_action.triggered.connect(self.about)
 
+        # Create navbar toolbar
+        toolbar = QToolBar()
+        toolbar.setMovable(True)
+        self.addToolBar(toolbar)
+
+        to_favourites = QAction("Favourites", self)
+        to_favourites.triggered.connect(self.open_favourites)
+        toolbar.addAction(to_favourites)
+
+        to_to_read = QAction("To Read", self)
+        to_to_read.triggered.connect(self.open_to_read)
+        toolbar.addAction(to_to_read)
+
+        to_currently_reading = QAction("Currently Reading", self)
+        to_currently_reading.triggered.connect(self.open_currently_reading)
+        toolbar.addAction(to_currently_reading)
+
+        to_read = QAction("Read", self)
+        to_read.triggered.connect(self.open_read)
+        toolbar.addAction(to_read)
+
+
         
     def add_favourite(self):
         # ? add favourite to the databse by querying SQL database
@@ -64,21 +90,6 @@ class MainWindow(QMainWindow):
         # ? Rather than having three seperate functions just make this dynamic
         pass
 
-    def favourites(self):
-        # ? Input creating a widget here for the user to see favourites that they have favourites etc
-        pass
-
-    def to_read(self):
-        # ? create the widget for their to-read selection
-        pass
-    
-    def currently_reading(self):
-        # ? create the widget for user to see their currently reading section
-        pass
-
-    def read(self):
-      # ? create widget for user to see their read reading section
-      pass
 
     def search(self):
         dialog = SearchDialog()
@@ -94,6 +105,22 @@ class MainWindow(QMainWindow):
 
     def exit_app(self):
         dialog = ExitDialog()
+        dialog.exec()
+
+    def open_favourites(self):
+        dialog = FavouritesDialog()
+        dialog.exec()
+
+    def open_to_read(self):
+        dialog = ToReadDialog()
+        dialog.exec()
+
+    def open_currently_reading(self):
+        dialog = CurrentlyReadingDialog()
+        dialog.exec()
+
+    def open_read(self):
+        dialog = ReadDialog()
         dialog.exec()
 
 

@@ -79,6 +79,9 @@ class MainWindow(QMainWindow):
         to_read.triggered.connect(self.open_read)
         toolbar.addAction(to_read)
 
+        # Create the shortcut toolbar
+        
+
 
         
     def add_favourite(self):

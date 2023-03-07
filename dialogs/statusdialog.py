@@ -38,7 +38,6 @@ class StatusDialog(QDialog):
 
     def update(self):
         self.selected= self.sender().text()
-        # ? THESE ARE FOR CHECKING THE VALUE
 
     def update_status(self):
         print(self.selected)

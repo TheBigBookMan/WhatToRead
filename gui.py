@@ -42,11 +42,11 @@ class MainWindow(QMainWindow):
         file_menu_item.addAction(exit_action)
         exit_action.triggered.connect(self.exit_app)
 
-        search_action = QAction("Search", self)
+        search_action = QAction(QIcon('images/search.png'), "Search", self)
         edit_menu_item.addAction(search_action)
         search_action.triggered.connect(self.search)
 
-        add_favourites_action = QAction("Add To Favourites", self)
+        add_favourites_action = QAction(QIcon('images/add.png'), "Add To Favourites", self)
         edit_menu_item.addAction(add_favourites_action)
         add_favourites_action.triggered.connect(self.add_favourite)
 
@@ -59,28 +59,34 @@ class MainWindow(QMainWindow):
         about_action.triggered.connect(self.about)
 
         # Create navbar toolbar
-        toolbar = QToolBar()
-        toolbar.setMovable(True)
-        self.addToolBar(toolbar)
+        navbar = QToolBar()
+        navbar.setMovable(True)
+        self.addToolBar(navbar)
 
         to_favourites = QAction("Favourites", self)
         to_favourites.triggered.connect(self.open_favourites)
-        toolbar.addAction(to_favourites)
+        navbar.addAction(to_favourites)
 
         to_to_read = QAction("To Read", self)
         to_to_read.triggered.connect(self.open_to_read)
-        toolbar.addAction(to_to_read)
+        navbar.addAction(to_to_read)
 
         to_currently_reading = QAction("Currently Reading", self)
         to_currently_reading.triggered.connect(self.open_currently_reading)
-        toolbar.addAction(to_currently_reading)
+        navbar.addAction(to_currently_reading)
 
         to_read = QAction("Read", self)
         to_read.triggered.connect(self.open_read)
-        toolbar.addAction(to_read)
+        navbar.addAction(to_read)
 
         # Create the shortcut toolbar
-        
+        toolbar = QToolBar()
+        toolbar.setMovable(True)
+        self.addToolBar(toolbar)
+        toolbar.addAction(search_action)
+        toolbar.addAction(add_favourites_action)
+
+
 
 
         

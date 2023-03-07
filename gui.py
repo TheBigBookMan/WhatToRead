@@ -80,13 +80,18 @@ class MainWindow(QMainWindow):
         navbar.addAction(to_read)
 
         # Create the shortcut toolbar
+        # ? Only the search should be seen but once a book is selected then the add to favourites and combobox are visisble
         toolbar = QToolBar()
         toolbar.setMovable(True)
         self.addToolBar(toolbar)
         toolbar.addAction(search_action)
         toolbar.addAction(add_favourites_action)
 
-
+        self.status_combo = QComboBox()
+        statuses = ["None", "To Read", "Currently Reading", "Read"]
+        self.status_combo.addItems(statuses)
+        self.status_combo.currentTextChanged.connect(self.update_status)
+        toolbar.addWidget(self.status_combo)
 
 
         
@@ -97,6 +102,10 @@ class MainWindow(QMainWindow):
     def update_status(self):
         # ? Can take in want-to-read/currently-reading/read ad then query the SQL database and update that book to that status
         # ? Rather than having three seperate functions just make this dynamic
+        
+        
+        updated_status = self.status_combo.itemText(self.status_combo.currentIndex())
+        # print(updated_status)
         pass
 
 

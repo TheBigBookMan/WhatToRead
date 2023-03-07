@@ -14,8 +14,7 @@ class SearchDialog(QDialog):
         layout.addWidget(self.search_book)
 
         self.book_genre = QComboBox()
-        # !!!! COPY AND PASTE THE GENRES FROM THE API
-        genres = ["Any", "Horror", "Thriller", "Action", "Self-Help"]
+        genres = ["Any", "Antiques & Collectibles", "Architecture", "Art", "Bibles", "Biography & Autobiography", "Body, Mind & Spirit", "Business & Economics", "Comics & Graphic Novels", "Computers", "Cooking", "Crafts & Hobbies", "Design", "Drama", "Education", "Family & Relationships", "Fiction", "Foreign Language Study", "Games & Activities", "Gardening", "Health & Fitness", "History", "House & Home", "Humor", "Language Arts & Disciplines", "Law", "Literary", "Literary Criticism", "Mathematics", "Medical", "Music", "Nature", "Performing Arts", "Pets", "Philosophy", "Photography", "Poetry", "Political Science", "Psychology", "Reference", "Religion", "Science", "Self Help", "Social Science", "Sports & Recreation", "Study Aids", "Technology & Engineering", "Transportation", "Travel", "True Crime", "Young Adult Fiction", "Young Adult Nonfiction"]
         self.book_genre.addItems(genres)
         self.book_genre.setCurrentText(genres[0])
         layout.addWidget(self.book_genre)
@@ -27,10 +26,23 @@ class SearchDialog(QDialog):
 
     def search_for_book(self):
         # ? This will call the api for the books 
-        book_list = call_google_books("mans+search+for+meaning")
-        self.filter_search(book_list)
         chosen_subject = self.book_genre.itemText(self.book_genre.currentIndex())
+        input_title = self.search_book.text()
+
+        if input_title != "" and chosen_subject != "Any":
+            input_title = f"{input_title}+"
+
+        if chosen_subject == "Any":
+            chosen_subject = ""
+        else:
+            category = chosen_subject.replace(' ', '+')
+            chosen_subject = f"subject:{category}"
+
+        value = input_title + chosen_subject
+        book_list = call_google_books(value)
+        self.filter_search(book_list)
+        
         
     def filter_search(self, list):
-        # print(list)
+        print(list)
         pass

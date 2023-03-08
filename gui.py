@@ -113,6 +113,7 @@ class MainWindow(QMainWindow):
         dialog = SearchDialog()
         dialog.exec()
         returned_books = dialog.google_books
+        print(returned_books)
 
     def about(self):
         dialog = AboutDialog()

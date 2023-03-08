@@ -46,7 +46,7 @@ class SearchDialog(QDialog):
         
         
     def filter_search(self, list_books):
-        print(list_books)
+        # print(list_books)
         empty_list = []
 
         for item in list_books:
@@ -58,7 +58,7 @@ class SearchDialog(QDialog):
             book_dict['description'] = item['volumeInfo']['description']
             book_dict['categories'] = item['volumeInfo']['categories']
             book_dict['image'] = item['volumeInfo']['imageLinks']['thumbnail']
-            print(book_dict)
+            empty_list.append(book_dict)
 
-        self.google_books = list_books
+        self.google_books = empty_list
         self.close()

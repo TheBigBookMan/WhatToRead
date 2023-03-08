@@ -1,6 +1,8 @@
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QComboBox, QPushButton
 from api import call_google_books
 
+# https://developers.google.com/books/docs/v1/using#PerformingSearch
+
 class SearchDialog(QDialog):
     def __init__(self):
         super().__init__()
@@ -43,6 +45,7 @@ class SearchDialog(QDialog):
         self.filter_search(book_list)
         
         
-    def filter_search(self, list):
-        print(list)
-        pass
+    def filter_search(self, list_books):
+        # print(list_books)
+        self.google_books = list_books
+        self.close()

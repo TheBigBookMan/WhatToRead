@@ -112,8 +112,7 @@ class MainWindow(QMainWindow):
     def search(self):
         dialog = SearchDialog()
         dialog.exec()
-        print(dialog.google_books)
-
+        returned_books = dialog.google_books
 
     def about(self):
         dialog = AboutDialog()

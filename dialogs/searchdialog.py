@@ -46,6 +46,19 @@ class SearchDialog(QDialog):
         
         
     def filter_search(self, list_books):
-        # print(list_books)
+        print(list_books)
+        empty_list = []
+
+        for item in list_books:
+            book_dict = {}
+            book_dict['id'] = item['id']
+            book_dict['title'] = item['volumeInfo']['title']            
+            book_dict['authors'] = item['volumeInfo']['authors']
+            book_dict['publishedDate'] = item['volumeInfo']['publishedDate']
+            book_dict['description'] = item['volumeInfo']['description']
+            book_dict['categories'] = item['volumeInfo']['categories']
+            book_dict['image'] = item['volumeInfo']['imageLinks']['thumbnail']
+            print(book_dict)
+
         self.google_books = list_books
         self.close()

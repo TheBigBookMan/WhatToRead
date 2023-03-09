@@ -94,9 +94,18 @@ class MainWindow(QMainWindow):
         toolbar.addWidget(self.status_combo)
 
         self.table = QTableWidget()
-        self.table.setColumnCount(6)
+        self.table.setColumnCount(5)
+        self.table.setHorizontalHeaderLabels(("title", "authors", "published", "description", "categories", ""))
+        self.table.verticalHeader().setVisible(False)
+        self.setCentralWidget(self.table)
 
-        
+    
+    def load_data(self, book_list):
+        print(self.returned_books)
+        # ? Same load data for the table cells as the main/py load_data function
+        pass
+
+
     def add_favourite(self):
         # ? add favourite to the databse by querying SQL database
         pass
@@ -115,7 +124,7 @@ class MainWindow(QMainWindow):
         dialog = SearchDialog()
         dialog.exec()
         self.returned_books = dialog.google_books
-        print(self.returned_books)
+        self.load_data(self.returned_books)
 
     def about(self):
         dialog = AboutDialog()

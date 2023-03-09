@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QLineEdit, QComboBox, QPushButton, QToolBar
+from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QLineEdit, QComboBox, QPushButton, QToolBar, QGridLayout
 from PyQt6.QtGui import QAction, QIcon
 import sys
 from dialogs.searchdialog import SearchDialog
@@ -93,6 +93,8 @@ class MainWindow(QMainWindow):
         self.status_combo.currentTextChanged.connect(self.update_status)
         toolbar.addWidget(self.status_combo)
 
+        layout = QGridLayout()
+        self.setLayout(layout)
 
         
     def add_favourite(self):
@@ -112,8 +114,8 @@ class MainWindow(QMainWindow):
     def search(self):
         dialog = SearchDialog()
         dialog.exec()
-        returned_books = dialog.google_books
-        print(returned_books)
+        self.returned_books = dialog.google_books
+        print(self.returned_books)
 
     def about(self):
         dialog = AboutDialog()

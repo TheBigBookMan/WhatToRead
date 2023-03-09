@@ -51,14 +51,18 @@ class SearchDialog(QDialog):
 
         for item in list_books:
             book_dict = {}
-            book_dict['id'] = item['id']
-            book_dict['title'] = item['volumeInfo']['title']            
-            book_dict['authors'] = item['volumeInfo']['authors']
-            book_dict['publishedDate'] = item['volumeInfo']['publishedDate']
-            book_dict['description'] = item['volumeInfo']['description']
-            book_dict['categories'] = item['volumeInfo']['categories']
-            book_dict['image'] = item['volumeInfo']['imageLinks']['thumbnail']
-            empty_list.append(book_dict)
+            try:
+                book_dict['id'] = item['id']
+                book_dict['title'] = item['volumeInfo']['title']            
+                book_dict['authors'] = item['volumeInfo']['authors']
+                if item['volumeInfo']['publishedDate']:
+                    book_dict['publishedDate'] = item['volumeInfo']['publishedDate']
+                book_dict['description'] = item['volumeInfo']['description']
+                book_dict['categories'] = item['volumeInfo']['categories']
+                book_dict['image'] = item['volumeInfo']['imageLinks']['thumbnail']
+                empty_list.append(book_dict)
+            except KeyError:
+                print("KeyError")
 
         self.google_books = empty_list
         self.close()

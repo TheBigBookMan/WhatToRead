@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QLineEdit, QComboBox, QPushButton, QToolBar, QGridLayout
+from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QLineEdit, QComboBox, QPushButton, QToolBar, QTableWidget
 from PyQt6.QtGui import QAction, QIcon
 import sys
 from dialogs.searchdialog import SearchDialog
@@ -93,8 +93,8 @@ class MainWindow(QMainWindow):
         self.status_combo.currentTextChanged.connect(self.update_status)
         toolbar.addWidget(self.status_combo)
 
-        layout = QGridLayout()
-        self.setLayout(layout)
+        self.table = QTableWidget()
+        self.table.setColumnCount(6)
 
         
     def add_favourite(self):

@@ -62,7 +62,7 @@ class SearchDialog(QDialog):
                 book_dict['image'] = item['volumeInfo']['imageLinks']['thumbnail']
                 empty_list.append(book_dict)
             except KeyError:
-                print("KeyError")
+                print(f"KeyError {KeyError}")
 
         self.google_books = empty_list
         self.close()

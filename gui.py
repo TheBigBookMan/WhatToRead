@@ -101,8 +101,11 @@ class MainWindow(QMainWindow):
 
     
     def load_data(self, book_list):
-        print(self.returned_books)
+        print("booklist")
+        print(book_list)
         # ? Same load data for the table cells as the main/py load_data function
+
+        # !!! need to trim the description to a shorter length so it can fit, some are 2000 words, description[:300] + "..."
         pass
 
 

@@ -51,18 +51,39 @@ class SearchDialog(QDialog):
 
         for item in list_books:
             book_dict = {}
+            book_dict['id'] = item['id']
+
             try:
-                book_dict['id'] = item['id']
-                book_dict['title'] = item['volumeInfo']['title']            
+                book_dict['title'] = item['volumeInfo']['title']
+            except KeyError: 
+                book_dict['title'] = ""
+
+            try:
                 book_dict['authors'] = item['volumeInfo']['authors']
-                if item['volumeInfo']['publishedDate']:
-                    book_dict['publishedDate'] = item['volumeInfo']['publishedDate']
-                book_dict['description'] = item['volumeInfo']['description']
-                book_dict['categories'] = item['volumeInfo']['categories']
-                book_dict['image'] = item['volumeInfo']['imageLinks']['thumbnail']
-                empty_list.append(book_dict)
             except KeyError:
-                print(f"KeyError {KeyError}")
+                book_dict['authors'] = ""
+
+            try:
+                book_dict['publishedDate'] = item['volumeInfo']['publishedDate']
+            except KeyError:
+                book_dict['publishedDate'] = ""
+
+            try:
+                book_dict['description'] = item['volumeInfo']['description']
+            except KeyError: 
+                book_dict['description'] = ""
+
+            try:
+                book_dict['categories'] = item['volumeInfo']['categories']
+            except KeyError:
+                book_dict['categories'] = ""
+
+            try: 
+                book_dict['image'] = item['volumeInfo']['imageLinks']['thumbnail']
+            except KeyError:
+                book_dict['image'] = ""
+
+            empty_list.append(book_dict)
 
         self.google_books = empty_list
         self.close()

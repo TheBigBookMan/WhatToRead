@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QLineEdit, QComboBox, QPushButton, QToolBar, QTableWidget
+from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QLineEdit, QComboBox, QPushButton, QToolBar, QTableWidget, QTableWidgetItem
 from PyQt6.QtGui import QAction, QIcon
 import sys
 from dialogs.searchdialog import SearchDialog
@@ -15,7 +15,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("WhatToRead")
-        self.setMinimumSize(800, 600)
+        self.setMinimumSize(1000, 800)
 
         #* Create menu bar
         file_menu_item = self.menuBar().addMenu('&File')
@@ -95,18 +95,29 @@ class MainWindow(QMainWindow):
 
         self.table = QTableWidget()
         self.table.setColumnCount(5)
-        self.table.setHorizontalHeaderLabels(("title", "authors", "published", "description", "categories", ""))
+        self.table.setHorizontalHeaderLabels(("title", "authors", "published", "description", "categories"))
         self.table.verticalHeader().setVisible(False)
         self.setCentralWidget(self.table)
 
     
     def load_data(self, book_list):
-        print("booklist")
-        print(book_list)
+        # print(book_list)
         # ? Same load data for the table cells as the main/py load_data function
 
         # !!! need to trim the description to a shorter length so it can fit, some are 2000 words, description[:300] + "..."
-        pass
+
+        self.table.setRowCount(0)
+        for row_num, items in enumerate(book_list):
+            authors = ", ".join(items['authors'])
+            categories = ", ".join(items['categories'])
+            description = items['description'][:200] + "..."
+            self.table.insertRow(row_num)
+            self.table.setItem(row_num, 0, QTableWidgetItem(items['title']))
+            self.table.setItem(row_num, 1, QTableWidgetItem(authors))
+            self.table.setItem(row_num, 2, QTableWidgetItem(items['publishedDate']))
+            self.table.setItem(row_num, 3, QTableWidgetItem(description))
+            self.table.setItem(row_num, 4, QTableWidgetItem(categories))
+                
 
 
     def add_favourite(self):
